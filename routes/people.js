@@ -42,7 +42,7 @@ router.post('/people', jsonParser, function(request, response){
     if(err){
       console.log('Connection error', err);
     }
-    client.query('INSERT INTO people (people_first_name, people_last_name) VALUES ($1, $2)', [firstName, lastName], function(err, rows){
+    client.query('INSERT INTO people (person_first_name, person_last_name) VALUES ($1, $2)', [firstName, lastName], function(err, rows){
       if(err){
         response.sendStatus(500);
       } else {
