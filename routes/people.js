@@ -6,9 +6,9 @@ var config = {
   database: 'patronus_assigner',
   port: 5432
 };
+var client = new pg.Client(config);
 
 router.get('/people', function(request, response){
-  var client = new pg.Client(config);
   client.connect(function(err){
     if(err){
       console.log('Connection error', err);
@@ -33,8 +33,29 @@ router.get('/people', function(request, response){
   });
 });
 
-router.post('/people', function(request, response){
-  
-})
+app.post('/people', function(request, response){
+  console.log(request.body);
+  var firstName = request.body.first;
+  var lastName = request.body.last;
+  client.connect(function(err){
+    if(err){
+      console.log('Connection error', err);
+    }
+    client.query('INSERT INTO people (first_name, last_name) VALUES ($1, $2)', [firstName, lastName], function(err, rows){
+      if(err){
+        console.log('Query error', err);
+        response.sendStatus(500);
+      } else {
+        console.log('Great success');
+        response.sendStatus(200);
+      }
+      client.end(function(err){
+        if(err){
+          console.log('Disconnect error', err);
+        }
+      })
+    })
+  })
+});
 
 module.exports = router;
