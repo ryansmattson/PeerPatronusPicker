@@ -11,8 +11,10 @@ app.use(express.static('public'));
 
 app.use('/', index);
 app.get('/people', people)
+app.get('/people/*', people)
 app.post('/people', people)
 app.get('/patronuses', patronuses)
+app.get('/patronuses/*', patronuses)
 app.post('/patronuses', patronuses)
 
 var server = app.listen(3000, handleServerStart);

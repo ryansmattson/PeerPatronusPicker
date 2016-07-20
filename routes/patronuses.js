@@ -35,6 +35,33 @@ router.get('/patronuses', function(request, response){
   });
 });
 
+router.get('/patronuses/:id', function(request, response){
+  var id = request.params.id;
+  var client = new pg.Client(config);
+  client.connect(function(err){
+    if(err){
+      console.log('Connection error', err);
+    }
+    client.query('SELECT * FROM patronus WHERE patronus_id = $1;', [id], function(err, result){
+      var peopleList = {};
+      peopleList = result.rows;
+      if(err){
+        // console.log('Query error', err);
+        response.sendStatus(500);
+      } else {
+        // console.log('Great success', peopleList);
+        response.send(peopleList);
+      }
+
+      client.end(function(err){
+        if(err){
+          console.log('Disconnect error', err);
+        }
+      });
+    });
+  });
+});
+
 router.post('/patronuses', jsonParser, function(request, response){
   var client = new pg.Client(config);
   var patronus = request.body.patronus;
