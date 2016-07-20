@@ -20,7 +20,7 @@
         <input type="text" ng-model="main.tempName" placeholder="Type name here"></input>
         <button ng-click="main.submitName()">Submit</button>
         <ul ng-repeat="name in main.names">
-          <li>{{name}}</li>
+          <li>{{name.name}}</li>
         </ul>
       </form>
     </div>
@@ -29,7 +29,7 @@
         <input type="text" ng-model="main.tempPatronus" placeholder="Type patronus here"></input>
         <button ng-click="main.submitPatronus()">Submit</button>
         <ul ng-repeat="patronus in main.patronuses">
-          <li>{{patronus}}</li>
+          <li>{{patronus.patronus_name}}</li>
         </ul>
       </form>
     </div>

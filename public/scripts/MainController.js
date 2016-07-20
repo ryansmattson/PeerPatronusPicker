@@ -32,8 +32,6 @@ angular.module('patronusApp').controller('MainController', function($http){
     $http.post('/patronuses', sendData).then(handlePatronusSuccess, handleFailure);
   }
 
-
-
   function handleNameSuccess(response){
     console.log('Success', response);
     vm.getNames();
@@ -47,7 +45,7 @@ angular.module('patronusApp').controller('MainController', function($http){
   function handleFailure(response){
     console.log('Failure', response);
   }
-  
+
   vm.getNames();
   vm.getPatronuses();
 
