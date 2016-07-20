@@ -1,19 +1,17 @@
 var express = require('express');
 var index = require('./routes/index');
+var people = require('./routes/people');
+var patronuses = require('./routes/patronuses')
 var pg = require('pg');
 
 var app = express();
-
-var config = {
-  database: 'twittergenerator',
-  port: 5432
-};
 
 app.use(express.static('public'));
 
 
 app.use('/', index);
-
+app.get('/people', people)
+app.get('/patronuses', patronuses)
 // app.get('/nouns', function(request, response){
 //
 //
